@@ -1,7 +1,9 @@
 import React from "react";
-import CatCard from "./CatCard";
+import CatCard from "../../Componets/CatCard";
 
 function Category() {
+
+   
     return (
         <div className="max-w-7xl mx-auto mt-6 p-6 bg-white rounded-lg ">
             {/* Header */}
@@ -14,11 +16,8 @@ function Category() {
             <p className="text-gray-600 text-xl font-medium mb-4">Choose a category:</p>
 
             {/* Category Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-4 sm:grid-cols-3 gap-4">
-                <CatCard />
-                <CatCard />
-                <CatCard />
-                <CatCard />
+            <div >
+                <CatCard  />
             </div>
         </div>
     );

@@ -1,18 +1,66 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Componets/Header';
 import WorkerCard from '../Componets/WorkerCard';
 import { FaSearch } from "react-icons/fa";
+import Footer from '../Componets/Footer';
+import { useLocation } from 'react-router-dom';
+import { searchCategoryApi } from '../services/allApi';
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 function CategorySelect() {
-  const allCategories = ["Plumber", "Electrician", "Carpenter", "Painter", "Welder"];
 
+  const token = sessionStorage.getItem("token");
   const [searchTerm, setSearchTerm] = useState('');
+  const [unavailableCatogryfield, setunavailableCatogryfield] = useState([])
+  const [availableCatogryfield, setavailableCatogryfield] = useState([])
+  // Show more states
+  const [availableLimit, setAvailableLimit] = useState(8);
+  const [unavailableLimit, setUnavailableLimit] = useState(8);
+
+  const query = useQuery();
+  const field = query.get("field");
+
+  useEffect(() => {
+    if (field) {
+      fileterdCategory(field);
+    }
+  }, [field, searchTerm]);
+
+  const fileterdCategory = async (field) => {
+    if (token) {
+
+      const reqheader = {
+        "content-type": "application/json",
+        "authorization": `Bearer ${token}`
+      }
+
+      console.log(field, "field");
+
+      try {
+        const result = await searchCategoryApi(searchTerm ? searchTerm : field, reqheader)
+        setavailableCatogryfield(result.data.filteredAvailableUsers)
+        setunavailableCatogryfield(result.data.filteredUnavailableUsers)
+        setAvailableLimit(4); // Reset limits on new search
+        setUnavailableLimit(4);
+      } catch (error) {
+        console.log(error);
+
+      }
+
+    }
+
+
+  }
+
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen flex flex-col  bg-gray-100 ">
       <Header />
 
-      <div className=" mx-auto  ">
+      <div className="max-w-7xl flex-1 ">
         {/* Search Bar */}
         <div className="flex justify-center w-full pt-10">
           <div className="relative w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%]">
@@ -27,27 +75,63 @@ function CategorySelect() {
           </div>
         </div>
 
-
+        {/* Worker Lists */}
         <div className="grid px-4 max-w-7xl gap-6">
           {/* Available Categories */}
-          <div className="  p-4">
+          <div className="p-4">
             <h2 className="text-lg font-semibold mb-3">Available</h2>
-            <div className="space-y-2 grid gap-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
-              <WorkerCard />
-              <WorkerCard />
+            <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+
+              {availableCatogryfield?.length > 0 ? (
+                availableCatogryfield.slice(0, availableLimit).map((worker, index) => (
+                  <WorkerCard key={index} filterdWorker={worker} />
+                ))
+              ) : (
+                <p>No workers available</p>
+              )}
+
             </div>
+
+            {/* Show "See More" button only if more workers exist */}
+            {availableCatogryfield.length > availableLimit && (
+              <p
+                className="text-end text-blue-600 cursor-pointer hover:underline mt-2"
+                onClick={() => setAvailableLimit(prev => prev + 4)}
+              >
+                See More
+              </p>
+            )}
           </div>
 
           {/* Unavailable Categories */}
-          <div className=" p-4">
+          <div className="p-4">
             <h2 className="text-lg font-semibold mb-3">Unavailable</h2>
-            <div className="space-y-2 grid gap-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
-              <WorkerCard />
-              <WorkerCard />
+            <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+
+              {unavailableCatogryfield?.length > 0 ? (
+                unavailableCatogryfield.slice(0, unavailableLimit).map((worker, index) => (
+                  <WorkerCard key={index} filterdWorker={worker} />
+                ))
+              ) : (
+                <p>No workers available</p>
+              )}
+
             </div>
+
+            {/* Show "See More" button only if more workers exist */}
+            {unavailableCatogryfield.length > unavailableLimit && (
+              <p
+                className="text-end text-red-600 cursor-pointer hover:underline mt-2"
+                onClick={() => setUnavailableLimit(prev => prev + 4)}
+              >
+                See More
+              </p>
+            )}
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

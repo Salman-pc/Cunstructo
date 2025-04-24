@@ -1,17 +1,22 @@
 import React from 'react'
 import Header from '../Componets/Header'
-import Category from '../Componets/Catogory/Catogory'
+import Category from './Catogory/Catogory'
 import Curosal from '../Componets/Curosal'
-
+import Footer from '../Componets/Footer'
 
 function Dashbord() {
+
+  // Triggers a re-render
   return (
-    <div>
-        <Header/>
-        <div className='mt-10'>
-            <Curosal/>        
-            <Category/>
-        </div>
+    <div className='min-h-screen flex flex-col'>
+      <Header />
+      <div className='mt-10 flex-1'>
+        <Curosal />
+
+        <Category />
+
+      </div>
+      <Footer />
     </div>
   )
 }
