@@ -69,10 +69,10 @@ function CategorySelect() {
     <div className="min-h-screen flex flex-col  bg-gray-100 ">
       <Header />
 
-      <div className="max-w-7xl flex-1 ">
+      <div className=" flex-1 ">
         {/* Search Bar */}
-        <div className="flex justify-center w-full pt-10">
-          <div className="relative w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%]">
+        <div className="flex justify-center  pt-10">
+          <div className="relative w-[90%] sm:w-[80%] md:w-[70%] lg:w-[6s0%]">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <input
               type="text"
