@@ -3,6 +3,8 @@ import { Edit, Trash2 } from "lucide-react";
 import { addCategoryApi, deleteCategoryApi, getCategoryApi, updateCategoryApi } from "../../services/allApi";
 import serverUrl from "../../services/serverUrl";
 import { displaycategoryContext } from "../../Context/OtherPurpuseContextApi";
+import addImage from '../../assets/addImage.jpg'
+import { toast } from "react-toastify";
 
 function AddCategory() {
 
@@ -66,10 +68,13 @@ function AddCategory() {
         try {
           const result = await updateCategoryApi(id, reqbody, reqheader)
 
-          console.log(result.data);
           setgetAllCategorydata(result.data)
           setaddsandCatogoryResponse(result.data)
-          getAllcategory()
+          if(result.status>=200&&result.status<=300){
+            toast.success("successfully updated catogory!!")
+            getAllcategory()
+          }
+         
 
         } catch (error) {
           console.log(error);
@@ -90,9 +95,11 @@ function AddCategory() {
         try {
 
           const result = await addCategoryApi(reqbody, reqheader)
-          console.log(result);
 
-          getAllcategory()
+          if (result.status >= 200 && result.status <= 300) {
+            toast.success("successfully Added catogory!!")
+            getAllcategory()
+          }
 
         } catch (error) {
           console.log(error);
@@ -103,14 +110,18 @@ function AddCategory() {
       setCategoryData({ categoryname: "", categoryimg: "" })
     }
     else {
-      alert("please compleate ")
+      toast.warning("please compleate ")
     }
   };
 
   const handleDeleteCategory = async (id) => {
     try {
       const result = await deleteCategoryApi(id)
-      getAllcategory()
+      
+      if (result.status >= 200 && result.status <= 300) {
+        getAllcategory()
+        toast.success("successfully removed catogory!!")
+      }
     } catch (error) {
       console.log(error);
 
@@ -120,12 +131,14 @@ function AddCategory() {
   const handleEditCategory = (cat) => {
     setCategoryData({ categoryname: cat.categoryname, categoryimg: cat.categoryimg })
     setimageadd(`${serverUrl}/uploads/${cat.categoryimg}`);
+    toast.success("catogory selected")
     setEditingCategory(cat);
+
   };
 
   return (
     <div className="bg-white rounded-2xl md:pt-40 pt-24 w-full max-w-7xl mx-auto">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+      <h2 className="text-2xl md:mt-3 font-semibold text-gray-800 mb-4">
         {editingCategory ? "Edit Category" : "Add Category"}
       </h2>
 
@@ -133,7 +146,7 @@ function AddCategory() {
 
         <div className="w-[300px] h-[250px] flex justify-center  bg-blue-600 rounded-md p-10">
           <label htmlFor="fileInput" className="cursor-pointer ">
-            <img src={imageadd} alt="Category" className="border w-[190px] h-full object-fill rounded-full shadow-md" />
+            <img src={imageadd ? imageadd : addImage} alt="Category" className="border w-[190px] h-full object-fill rounded-full shadow-md" />
           </label>
         </div>
 

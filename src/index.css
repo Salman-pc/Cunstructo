@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 10px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
 /* swiper */ 
 
  #app {

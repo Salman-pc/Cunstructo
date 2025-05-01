@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Trash2, Edit } from "lucide-react";
 import { addADDSApi, deleteADDSApi, getADDSApi, updateADDSApi } from "../../services/allApi";
 import serverUrl from "../../services/serverUrl";
+import advertice from "../../assets/advertice.jpg"
+import { toast } from "react-toastify";
 
-function Add_Ads() {
+function Advertice() {
     const [adImage, setAdImage] = useState();
     const [adsdata, setAdsdata] = useState({ adsimg: "", adsname: "" });
     const [editingAd, setEditingAd] = useState(null);
@@ -45,10 +47,16 @@ function Add_Ads() {
                     "Content-type": "multipart/form-data" };
 
                 if (editingAd) {
-                    await updateADDSApi(editingAd._id, reqbody, reqheader);
+                   const result= await updateADDSApi(editingAd._id, reqbody, reqheader);
                     setEditingAd(null);
+                    if(result.status>=200&&result.status<=300){
+                        toast.success("successfully updated Advertice!!")
+                      }
                 } else {
-                    await addADDSApi(reqbody, reqheader);
+                    const result=await addADDSApi(reqbody, reqheader);
+                    if(result.status>=200&&result.status<=300){
+                        toast.success("successfully Added Advertice!!")
+                      }
                 }
 
                 getAllAds();
@@ -63,7 +71,11 @@ function Add_Ads() {
     const handleDeleteAd = async (id) => {
         try {
             await deleteADDSApi(id);
-            getAllAds();
+            if(result.status>=200&&result.status<=300){
+                toast.success("successfully removed Advertice!!")
+                getAllAds();
+              }
+            
         } catch (error) {
             console.log(error);
         }
@@ -72,21 +84,22 @@ function Add_Ads() {
     const handleEditAd = (ad) => {
         setAdsdata({ adsname: ad.adsname, adsimg: ad.adsimg });
         setAdImage(`${serverUrl}/uploads/${ad.adsimg}`);
+        toast.success("Advertice selected")
         setEditingAd(ad);
     };
 
     return (
         <div className="bg-white md:pt-40 pt-24 w-full max-w-7xl mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-2xl md:mt-3 font-semibold text-gray-800 mb-4">
                 {editingAd ? "Edit Advertisement" : "Update Advertisement"}
             </h2>
 
             <div className="flex flex-col items-center space-y-4">
                 <label className="cursor-pointer w-full p-8" onClick={() => document.getElementById("fileInput").click()}>
                     <img
-                        src={adImage || "default-placeholder.jpg"}
+                        src={adImage || advertice}
                         alt="Ad Preview"
-                        className="w-full border h-40 object-cover rounded-lg shadow-md"
+                        className="w-full border h-40 lg:h-64 object-cover rounded-lg shadow-md"
                     />
                 </label>
 
@@ -121,7 +134,7 @@ function Add_Ads() {
                         {getAds.map((item) => (
                             <li key={item._id} className="flex items-center justify-between p-3 bg-gray-100 rounded-lg shadow">
                                 <div className="flex items-center space-x-4">
-                                    <img src={`${serverUrl}/uploads/${item.adsimg}`} alt="" className="w-16 h-16 object-cover rounded" />
+                                    <img src={`${serverUrl}/uploads/${item.adsimg}`} alt="" className="w-16 h-16  object-cover rounded" />
                                     <span className="font-medium text-gray-800">{item.adsname}</span>
                                 </div>
                                 <div className="flex space-x-2">
@@ -149,4 +162,4 @@ function Add_Ads() {
     );
 }
 
-export default Add_Ads;
+export default Advertice;

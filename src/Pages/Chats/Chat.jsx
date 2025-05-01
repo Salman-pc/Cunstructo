@@ -7,6 +7,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import { useNavigate } from "react-router-dom";
 import { getuserforsidebarApi, getusersandworkersforsidebarApi } from "../../services/allApi";
 import { reciverIdContext, selectedChattoUserContext } from "../../Context/OtherPurpuseContextApi";
+import { FaComment, FaCommentMedical, FaMale } from "react-icons/fa";
 
 
 function Chat() {
@@ -35,21 +36,15 @@ function Chat() {
                 if (user.roll == "user") {
                     const result = await getuserforsidebarApi(reqheader)
                     setChatworkers(result.data)
-               
+
                 } else {
                     const result = await getusersandworkersforsidebarApi(reqheader)
                     setChatworkers(result.data)
-                    
-                   
+
                 }
-
             }
-
-          
-        
         } catch (error) {
             console.log(error);
-
         }
     }
 
@@ -79,24 +74,39 @@ function Chat() {
                         Chats
                     </h2>
 
-                    <div style={{ scrollbarWidth: 'thin' }} className="flex-grow md:h-[80vh] overflow-y-auto">
-                        {chatWorkers?.map((workers, key) => (
-                            <ChatCard key={key} workers={workers} onSelect={() => handleChatSelect(workers)} />
-
-                        ))}
+                    <div
+                        style={{ scrollbarWidth: 'thin' }}
+                        className={`flex-grow md:h-[80vh] overflow-y-auto ${chatWorkers?.length === 0 ? 'flex justify-center rotate-90 items-center' : ''
+                            }`}
+                    >
+                        {chatWorkers.length > 0 ? <div>
+                            {chatWorkers?.map((workers, key) => (
+                                <ChatCard key={key} workers={workers} onSelect={() => handleChatSelect(workers)} />
+                            ))}
+                        </div> : <span className="loading loading-bars text-gray-400 loading-xl"></span>}
                     </div>
                 </div>
 
                 {/* Chat Panel - Flexible width */}
                 <div className="hidden md:flex flex-1 w-62 h-full bg-white ">
                     {selectduserResponse ? (
-                        <Chatpanel isonline={true} />
+                        <Chatpanel />
                     ) : (
-                        <div className="flex-1 flex items-center justify-center bg-gray-50">
-                            <p className="text-gray-500 text-lg">
-                                Select a chat to start messaging
-                            </p>
+                        <div className="flex-1 flex items-center w-full justify-center bg-gray-50">
+                            <div className="text-center">
+                                {/* Chat Icons with Animation */}
+                                <div className="flex gap-6 justify-center mb-4">
+                                    <FaComment className="text-9xl text-blue-200 scale-x-[-1] animate-pulse" />
+                                    <FaComment className="text-9xl text-blue-300 animate-bounce delay-200" />
+                                </div>
+
+                                {/* Message Text */}
+                                <p className="text-gray-500 text-lg font-medium">
+                                    Select a chat to start messaging
+                                </p>
+                            </div>
                         </div>
+
                     )}
                 </div>
             </div>

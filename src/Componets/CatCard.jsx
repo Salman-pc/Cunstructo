@@ -2,22 +2,39 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { displaycategoryContext } from "../Context/OtherPurpuseContextApi";
 import serverUrl from "../services/serverUrl";
+import { toast } from "react-toastify";
 
 function CatCard() {
   const { categoryResponse } = useContext(displaycategoryContext);
 
-  console.log(categoryResponse,"categoryResponsecategoryResponsecategoryResponse");
-  
+
+
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token")
-  const user = sessionStorage.getItem("user")
+  const user = JSON.parse(sessionStorage.getItem("user"))
 
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 10000);
+
+    return () => clearTimeout(timer); // Cleanup
+  }, []);
 
   const handleCheckToken = (navigateUrl) => {
+
     if (token) {
-      navigate(navigateUrl);
+      if(user.roll=="admin"){
+        return
+      }
+      else{
+        navigate(navigateUrl);
+      }
+      
     } else {
-      alert("Please login to access this category.");
+      toast.warning("Please login to access this category.");
       navigate("/login"); // Redirect to login page
     }
   };
@@ -45,9 +62,16 @@ function CatCard() {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500">No categories available.</p>
-      )}
-    </div>
+        <div className="text-center my-4">
+          {showMessage ? (
+            <p className="text-lg text-gray-500">No categories available. Please check back later.</p>
+          ) : (
+            <span className="loading loading-dots text-gray-400 loading-xl"></span>
+          )}
+        </div>
+      )
+      }
+    </div >
   );
 }
 

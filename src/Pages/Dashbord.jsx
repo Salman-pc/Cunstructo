@@ -12,9 +12,7 @@ function Dashbord() {
       <Header />
       <div className='mt-10 flex-1'>
         <Curosal />
-
         <Category />
-
       </div>
       <Footer />
     </div>

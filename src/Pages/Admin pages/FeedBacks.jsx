@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Trash2, CheckCircle } from "lucide-react";
 import { deletefeedbackApi, getAllfeedbackApi } from "../../services/allApi";
+import { toast } from "react-toastify";
 
 function FeedBacks() {
     const [feedbacks, setFeedbacks] = useState({});
-
 
     useEffect(() => {
       getAllFeedback()
     }, [])
     
-
     const getAllFeedback=async()=>{
         const result = await getAllfeedbackApi()
-        setFeedbacks(result.data)
-        
+        setFeedbacks(result.data)   
     }
 
     const handleDeleteFeedback =async (id) => {
@@ -23,6 +21,7 @@ function FeedBacks() {
             const result = await deletefeedbackApi(id)
             if(result.status==200){
                 getAllFeedback()
+                toast.warning("removed user feed back")
             }
         } catch (error) {
             console.log(error);
@@ -30,13 +29,9 @@ function FeedBacks() {
         }
     };
 
-    // const handleResolveFeedback = (id) => {
-       
-    // };
-
     return (
         <div className=" rounded-2xl min-h-screen md:pt-40 pt-24 w-full max-w-7xl mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-800  mb-4">User Feedbacks</h2>
+            <h2 className="text-2xl md:mt-3 font-semibold text-gray-800  mb-4">User Feedbacks</h2>
             {feedbacks.length>0?
                 <ul className="space-y-4  mt-8 p-4 px-8 overflow-auto">
                    

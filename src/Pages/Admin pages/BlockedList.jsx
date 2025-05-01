@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {  Unlock } from "lucide-react";
 import { getAllblockedUsersApi, updateBlockApi } from "../../services/allApi";
+import { toast } from "react-toastify";
 
 function BlockedList() {
   const [blockedUsers, setBlockedUsers] = useState([]);
@@ -8,7 +9,6 @@ function BlockedList() {
 
   const [showAllUsers, setShowAllUsers] = useState(false);
   const [showAllWorkers, setShowAllWorkers] = useState(false);
-
 
   useEffect(() => {
     getAllblockedUsers()
@@ -44,6 +44,7 @@ function BlockedList() {
     try {
       const result = await updateBlockApi(id,{block:false})
       if(result.status==200){
+        toast.success("unblocked")
         getAllblockedUsers()
       }
     } catch (error) {
@@ -59,6 +60,7 @@ function BlockedList() {
       const result = await updateBlockApi(id,{block:false})
       if(result.status==200){
         getAllblockedWorkers()
+        toast.success("unblocked")
       }
     } catch (error) {
       console.log(error);
@@ -68,7 +70,7 @@ function BlockedList() {
 
   return (
     <div className="bg-white rounded-2xl md:pt-40 pt-24 w-full max-w-7xl mx-auto">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Blocked Users</h2>
+      <h2 className="text-xl font-semibold md:mt-3 text-gray-800 mb-4">Blocked Users</h2>
       {blockedUsers.length > 0 ? (
         <>
           <ul className="space-y-4 max-h-96 overflow-auto px-8">
@@ -78,8 +80,8 @@ function BlockedList() {
                 className="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow"
               >
                 <div>
-                  <p className="font-medium text-gray-800">{user.username}</p>
-                  <p className="font-medium text-gray-800">{user.email}</p>
+                  <p className="font-medium text-left text-gray-800">{user.username}</p>
+                  <p className="font-medium text-left text-gray-800">{user.email}</p>
                   {/* <p className="text-gray-500 text-xs">Blocked on: {user.date}</p> */}
                 </div>
                 <button
@@ -114,8 +116,8 @@ function BlockedList() {
                 className="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow"
               >
                 <div>
-                  <p className="font-medium text-gray-800">{worker.username}</p>
-                  <p className="font-medium text-gray-800">{worker.email}</p>
+                  <p className="font-medium text-left text-gray-800">{worker.username}</p>
+                  <p className="font-medium text-left text-gray-800">{worker.email}</p>
                   {/* <p className="text-gray-500 text-xs">Blocked on: {worker.date}</p> */}
                 </div>
                 <button

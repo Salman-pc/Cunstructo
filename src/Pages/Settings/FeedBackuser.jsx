@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { sendFeedbackApi } from "../../services/allApi";
+import { toast } from "react-toastify";
 
 function FeedBackuser() {
   const token = sessionStorage.getItem("token");
@@ -48,7 +49,7 @@ function FeedBackuser() {
           setFeedback({message: "", date: "" });
         }
         else{
-          alert("try again")
+          toast.warning("try again")
         }
       } catch (error) {
         console.log(error);

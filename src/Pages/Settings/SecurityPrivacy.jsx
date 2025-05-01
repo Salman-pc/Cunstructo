@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { changePasswordApi, deleteMyaccountApi } from '../../services/allApi';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function SecurityPrivacy() {
 
@@ -33,25 +34,24 @@ function SecurityPrivacy() {
 
           if (result.status >= 200 && result.status <= 299) {
             setChangePass({ currentPass: "", email: "", newPass: "", confirpass: "" });
-            alert("Password updated successfully!");
+            toast.success("Password updated successfully!");
           }
         } catch (error) {
           console.log(error);
-          alert(error?.response?.data?.message || "Something went wrong. Please try again.");
+          toast.warning(error?.response?.data?.message || "Something went wrong. Please try again.");
         }
       } else {
-        alert("Passwords do not match!");
+        toast.error("Passwords do not match!");
       }
     } else {
-      alert("Please complete the form.");
+      toast.error("Please complete the form.");
     }
   };
 
   const handleDeleteAccount = async () => {
-    console.log(deleteAcountdata,'sddflkksdfjlksdjflksdjfl');
-    
+   
     if (!deleteAcountdata.email || !deleteAcountdata.password) {
-      alert("Please fill in both fields before deleting.");
+      toast.warning("Please fill in both fields before deleting.");
       return;
     }
 
@@ -62,14 +62,13 @@ function SecurityPrivacy() {
       };
       try {
         const result = await deleteMyaccountApi(deleteAcountdata, reqheader)
-        console.log(result);
         
         if (result.status == 200) {
           sessionStorage.clear()
           navigate('/')
         }
         else {
-          alert(result.response.data)
+          toast.warning(result.response.data)
         }
       } catch (error) {
         console.log(error);

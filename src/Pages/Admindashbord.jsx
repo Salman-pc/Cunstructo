@@ -28,7 +28,7 @@ const AdminDashboard = () => {
                 {/* Sidebar */}
                 <div className={`fixed z-40 flex bg-opacity-50 md:h-fit h-screen transition-all duration-300 md:w-full ${sidebarOpen ? "w-64" : "w-0 overflow-hidden"}`}>
                     <div className="bg-white flex gap-3 shadow-lg h-full md:w-screen p-4">
-                        <nav className="flex md:flex-row gap-2 w-fit mx-auto md:justify-center flex-col space-y-2 md:mt-0 mt-12">
+                        <nav className="flex md:flex-row lg:gap-4 md:gap-1 gap-2 w-fit mx-auto md:justify-center flex-col  md:mt-0 mt-12">
 
                             <NavLink to={'/admindashbord/addcatogory'} className={({ isActive }) =>
                                 `w-full flex items-center gap-2 p-3 text-gray-700 font-medium hover:bg-gray-100 border-2 border-gray-100 rounded-lg transition ${isActive ? 'bg-blue-200' : ''}`}>

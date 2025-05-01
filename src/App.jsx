@@ -1,6 +1,6 @@
-
 import './App.css'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
 import UserSelection from './Pages/Auth/UserSelection'
 import Signup from './Pages/Auth/Signup'
 import Login from './Pages/Auth/Login'
@@ -14,59 +14,79 @@ import Profile from './Pages/Settings/Profile'
 import FeedBackuser from './Pages/Settings/FeedBackuser'
 import Help from './Pages/Settings/Help'
 import SecurityPrivacy from './Pages/Settings/SecurityPrivacy'
-import Add_Ads from './Pages/Admin pages/Add_Ads'
+import Advertice from './Pages/Admin pages/Advertice'
 import AddCategory from './Pages/Admin pages/AddCatogory'
 import BlockedList from './Pages/Admin pages/BlockedList'
 import UsersList from './Pages/Admin pages/UsersList'
 import WorkersList from './Pages/Admin pages/WorkersList'
 import FeedBacks from './Pages/Admin pages/FeedBacks'
 import Pnf from './Pages/Pnf'
-
-
-const ProtectedRoute = ({children})=>{
-  const isloggedin = localStorage.getItem('token') !==null || true ;
-
-  if(!isloggedin){
-    return <Navigate to={'/login'}/>
-  }
-  else if(isloggedin && ['/userSelection','/login'].includes(window.location.pathname)){
-    return <Navigate to={'/'}/>
-  }
-
-  return children
-}
+import { ToastContainer, Bounce } from 'react-toastify';
+import { LoginUserContext } from './Context/OtherPurpuseContextApi'
 
 function App() {
+  const [role, setRole] = useState(null)
+  const {loginUserResponse}=useContext(LoginUserContext)
+
+  useEffect(() => {
+    
+    const user = JSON.parse(sessionStorage.getItem("user"))
+    if (user) {
+      setRole(user.roll.toLowerCase()) // admin or user
+    }
+  }, [loginUserResponse])
 
   return (
     <div className='bg-white'>
-      <Routes  >
-        <Route path='*' element={<Pnf/>} />
+      <Routes>
+        <Route path='*' element={<Pnf />} />
         <Route path='/' element={<Dashbord />} />
         <Route path='/login' element={<Login />} />
         <Route path='/userSelection' element={<UserSelection />} />
         <Route path='/workersignup' element={<Signup isworker={true} />} />
         <Route path='/usersignup' element={<Signup />} />
-        <Route path='/admindashbord' element={<ProtectedRoute><Admindashbord /></ProtectedRoute>} >
-          <Route path="addcatogory" element={<ProtectedRoute><AddCategory /></ProtectedRoute>} />
-          <Route path='add_adds' element={<ProtectedRoute><Add_Ads /></ProtectedRoute>} />
-          <Route path='blocklist' element={<BlockedList />} />
-          <Route path='feedbacklist' element={<FeedBacks />} />
-          <Route path='userlist' element={<UsersList />} />
-          <Route path='workerlist' element={<WorkersList />} />
-        </Route>
 
-        <Route path='/chats' element={<ProtectedRoute><Chat /></ProtectedRoute>} />
-        <Route path='/settings' element={<Settings />}>
-          <Route path='profile' element={<Profile />} />
-          <Route path='feedbackuser' element={<FeedBackuser />} />
-          <Route path='help' element={<Help />} />
-          <Route path='security&password' element={<SecurityPrivacy />} />
-   
-        </Route>
-        <Route path='/catogoryselect' element={<CatogorySelect />} />
-        <Route path='/chatpanel' element={<ProtectedRoute><Chatpanel /></ProtectedRoute>} />
+        {/* Admin Routes */}
+        {role === 'admin' && (
+          <Route path='/admindashbord' element={<Admindashbord />}>
+            <Route path='addcatogory' element={<AddCategory />} />
+            <Route path='add_adds' element={<Advertice />} />
+            <Route path='blocklist' element={<BlockedList />} />
+            <Route path='feedbacklist' element={<FeedBacks />} />
+            <Route path='userlist' element={<UsersList />} />
+            <Route path='workerlist' element={<WorkersList />} />
+          </Route>
+        )}
+
+        {/* User Routes */}
+        {(role === 'worker' || role === 'user') && (
+          <>
+            <Route path='/chats' element={<Chat />} />
+            <Route path='/chatpanel' element={<Chatpanel />} />
+            <Route path='/catogoryselect' element={<CatogorySelect />} />
+            <Route path='/settings' element={<Settings />}>
+              <Route path='profile' element={<Profile />} />
+              <Route path='feedbackuser' element={<FeedBackuser />} />
+              <Route path='help' element={<Help />} />
+              <Route path='security&password' element={<SecurityPrivacy />} />
+            </Route>
+          </>
+        )}
       </Routes>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </div>
   )
 }

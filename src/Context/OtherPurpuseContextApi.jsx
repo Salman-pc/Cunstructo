@@ -7,6 +7,7 @@ export const displayadvertisContext = createContext()
 export const displayProfileContext = createContext()
 export const reciverIdContext = createContext()
 export const selectedChattoUserContext = createContext()
+export const LoginUserContext=createContext()
 
 function OtherPurpuseContextApi({ children }) {
 
@@ -16,6 +17,7 @@ function OtherPurpuseContextApi({ children }) {
     const [profileResponse, setProfileResponse] = useState()
     const [reciveridResponse, setreciveridResponse] = useState()
     const [selectduserResponse, setselectduserResponse] = useState()
+    const [loginUserResponse,setloginUserResposne]=useState([])
 
     // console.log(profileResponse, "profileResponse ");
 
@@ -46,19 +48,21 @@ function OtherPurpuseContextApi({ children }) {
         }
     };
     return (
-        <selectedChattoUserContext.Provider value={{ selectduserResponse, setselectduserResponse }}>
-            <reciverIdContext.Provider value={{ setreciveridResponse, reciveridResponse }}>
-                <displayProfileContext.Provider value={{ setProfileResponse, profileResponse }}>
-                    <displayadvertisContext.Provider value={{ advertisresponse, setaddsandCatogoryResponse }}>
-                        <displaycategoryContext.Provider
-                            value={{ categoryResponse, setCategoryResponse, setaddsandCatogoryResponse }}
-                        >
-                            {children}
-                        </displaycategoryContext.Provider>
-                    </displayadvertisContext.Provider>
-                </displayProfileContext.Provider>
-            </reciverIdContext.Provider>
-        </selectedChattoUserContext.Provider>
+       <LoginUserContext.Provider value={{loginUserResponse,setloginUserResposne}}>
+            <selectedChattoUserContext.Provider value={{ selectduserResponse, setselectduserResponse }}>
+                <reciverIdContext.Provider value={{ setreciveridResponse, reciveridResponse }}>
+                    <displayProfileContext.Provider value={{ setProfileResponse, profileResponse }}>
+                        <displayadvertisContext.Provider value={{ advertisresponse, setaddsandCatogoryResponse }}>
+                            <displaycategoryContext.Provider
+                                value={{ categoryResponse, setCategoryResponse, setaddsandCatogoryResponse }}
+                            >
+                                {children}
+                            </displaycategoryContext.Provider>
+                        </displayadvertisContext.Provider>
+                    </displayProfileContext.Provider>
+                </reciverIdContext.Provider>
+            </selectedChattoUserContext.Provider>
+       </LoginUserContext.Provider>
 
     )
 }

@@ -3,6 +3,7 @@ import { getSingleuserApi, updateProfileApi } from '../../services/allApi';
 import serverUrl from '../../services/serverUrl';
 import { displaycategoryContext ,displayProfileContext} from '../../Context/OtherPurpuseContextApi';
 import profileimg from '../../assets/profileimg/profileimg.webp'
+import { toast } from 'react-toastify';
 
 function Profile() {
 
@@ -85,14 +86,15 @@ function Profile() {
                 
                 
                 if(result.status>=200&&result.status<300){
-                    alert(result.data.message)
+                    
+                    toast.success(result.data.message)
                     getSingleuserApi()
                     setProfileResponse(result.data.data)
                 }
                 else{
                     
-                    
-                    alert(result.response.data.message)
+
+                    toast.warning(result.response.data.message)
                 }
                 
 

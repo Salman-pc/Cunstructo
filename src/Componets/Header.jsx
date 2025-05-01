@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, MessageSquare,Settings } from "lucide-react";
+import { Home, MessageSquare, Settings } from "lucide-react";
 import { FaUser, FaUserPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import cunstructoimg from "../assets/cunstructoimg.png";
@@ -11,6 +11,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { toast } from "react-toastify";
 
 function Header() {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Header() {
     const [openMenu, setOpenMenu] = React.useState(false);
 
     const handleCheckToken = () => {
-        alert("Please login");
+        toast.warning("Please login");
     };
 
     const handleSignOut = () => {
@@ -36,11 +37,12 @@ function Header() {
 
                 {/* Right Section */}
                 <div className="flex py-4 sm:gap-6 gap-3 items-center">
+                    <Link to="/">
+                        <Home className="text-white w-6 h-6 cursor-pointer hover:opacity-80 transition" />
+                    </Link>
                     {user?.roll !== "admin" && (
                         <>
-                            <Link to="/">
-                                <Home className="text-white w-6 h-6 cursor-pointer hover:opacity-80 transition" />
-                            </Link>
+
                             {token ? (
                                 <Link to="/chats">
                                     <MessageSquare className="text-white w-6 h-6 cursor-pointer hover:opacity-80 transition" />
@@ -100,8 +102,8 @@ function Header() {
                                     {token ? (
                                         <Link to="/settings">
                                             <MenuItem className="flex items-center p-1  gap-2">
-                                            <Settings className="text-gray-400 w-6" />
-                                               
+                                                <Settings className="text-gray-400 w-6" />
+
                                                 <Typography variant="small" className="font-medium">
                                                     Settings
                                                 </Typography>
@@ -119,6 +121,18 @@ function Header() {
                                     <hr className="my-1 border-blue-gray-50" />
                                 </>
                             )}
+
+                            {
+                                user.roll == "admin" && <Link to="/admindashbord/addcatogory">
+                                    <MenuItem className="flex items-center p-1 pl-0  gap-2">
+                                        <Settings className="text-gray-400 w-6" />
+
+                                        <Typography variant="small" className="font-medium">
+                                            Admin Dashboard
+                                        </Typography>
+                                    </MenuItem>
+                                </Link>
+                            }
 
                             <MenuItem onClick={handleSignOut} className="flex items-center p-1 gap-2">
                                 <svg
