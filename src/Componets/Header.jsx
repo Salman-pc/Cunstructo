@@ -33,13 +33,13 @@ function Header() {
         <header className="w-full bg-[#1877F2] shadow-md border-b border-blue-600">
             <div className="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
                 {/* Logo */}
-                <img className="w-32 h-10" src={cunstructoimg} alt="logo" />
+                <Link to={'/'}><img className="w-32 h-10" src={cunstructoimg} alt="logo" /></Link>
 
                 {/* Right Section */}
                 <div className="flex py-4 sm:gap-6 gap-3 items-center">
-                    <Link to="/">
+                    {/* <Link to="/">
                         <Home className="text-white w-6 h-6 cursor-pointer hover:opacity-80 transition" />
-                    </Link>
+                    </Link> */}
                     {user?.roll !== "admin" && (
                         <>
 
