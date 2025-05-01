@@ -11,11 +11,11 @@ import { displayadvertisContext } from '../Context/OtherPurpuseContextApi';
 
 function Curosal() {
 
-  const {advertisresponse}=useContext(displayadvertisContext)
+  const { advertisresponse } = useContext(displayadvertisContext)
 
   return (
     <div>
-        {advertisresponse?.length>0 &&<Swiper
+      {advertisresponse?.length > 0 && <Swiper
         spaceBetween={30}
         centeredSlides={true}
         loop={true}
@@ -24,20 +24,20 @@ function Curosal() {
           disableOnInteraction: false,
         }}
         pagination={{
-            
+
           clickable: true,
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {advertisresponse.map(adds=>
+        {advertisresponse.map(adds =>
           <SwiperSlide key={adds._id}>
-          <img className='object-cover w-full' src={`${serverUrl}/uploads/${adds.adsimg}`}  alt=""  />
-      </SwiperSlide>
+            <img className='object-cover w-full' src={`${serverUrl}/uploads/${adds.adsimg}`} alt="" />
+          </SwiperSlide>
         )}
-        
-        
+
+
       </Swiper>}
     </div>
   )

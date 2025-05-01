@@ -5,7 +5,7 @@ function UserSelection() {
   return (
     <div className="relative overflow-hidden flex flex-col items-center justify-center min-h-screen bg-gradient-to-r  from-blue-800 to-blue-500">
       
-      <div className="flex flex-col items-center justify-center ">
+      <div className="flex  flex-col items-center justify-center ">
         
         {/* Background Shapes */}
         <div className="absolute inset-0 z-0">
@@ -23,12 +23,12 @@ function UserSelection() {
           
           <div className="flex space-x-6">
             <Link to="/workersignup">
-              <button className="w-40 h-14 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium">
+              <button className="w-36 h-14 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium">
                 Worker
               </button>
             </Link>
             <Link to="/usersignup">
-              <button className="w-40 h-14 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium">
+              <button className="w-36 h-14 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium">
                 User
               </button>
             </Link>
