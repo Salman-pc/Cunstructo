@@ -82,7 +82,9 @@ const Footer = () => {
             <div>
               <h2 className="text-3xl font-bold mb-3">Constructo</h2>
               <p className="text-gray-200">
-                Building the future with precision and excellence since 2003.
+                Cunstructo helps users easily find skilled workers for home and building projects.
+                From construction to repairs, connect with trusted professionals near you.
+                Simple, reliable, and built for all your housing needs.
               </p>
             </div>
             <div className="flex space-x-4 pb-4 mt-4">
