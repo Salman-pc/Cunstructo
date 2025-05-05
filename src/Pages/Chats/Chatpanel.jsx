@@ -94,7 +94,7 @@ function Chatpanel() {
     return (
         <div className="flex flex-col w-full  h-screen bg-gray-200">
             {/* Chat Header */}
-            <div className="bg-blue-600 text-white z-50 fixed w-full md:static flex items-center justify-between p-2 px-5 border-b border-blue-700">
+            <div className="bg-[#1877F2] text-white z-50 fixed w-full md:static flex items-center justify-between p-2 px-5 border-b border-blue-700">
                 <div className='flex items-center gap-3'>
                     <Link className='md:hidden' to={'/chats'}><i className="fa-solid fa-arrow-left"></i></Link>
                     <div>

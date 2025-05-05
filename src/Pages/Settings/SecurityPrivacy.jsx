@@ -90,7 +90,7 @@ function SecurityPrivacy() {
           <input value={changePass.currentPass} onChange={(e) => setChangePass({ ...changePass, currentPass: e.target.value })} type="password" placeholder="Current Password" className="w-full p-3 border border-gray-300 rounded-lg mb-2" />
           <input value={changePass.newPass} onChange={(e) => setChangePass({ ...changePass, newPass: e.target.value })} type="password" placeholder="New Password" className="w-full p-3 border border-gray-300 rounded-lg mb-2" />
           <input value={changePass.confirpass} onChange={(e) => setChangePass({ ...changePass, confirpass: e.target.value })} type="password" placeholder="Confirm New Password" className="w-full p-3 border border-gray-300 rounded-lg mb-2" />
-          <button onClick={handleChangePass} className="bg-blue-600 w-fit text-white px-4 py-2 rounded-md hover:bg-blue-700">Update Password</button>
+          <button onClick={handleChangePass} className="bg-[#1877F2] w-fit text-white px-4 py-2 rounded-md hover:bg-blue-700">Update Password</button>
         </div>
       </div>
 

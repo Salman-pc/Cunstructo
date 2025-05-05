@@ -47,7 +47,7 @@ function CatCard() {
             <div
               key={item._id}
               onClick={() => handleCheckToken(`/catogoryselect?field=${item.categoryname}`)}
-              className="p-6 bg-blue-600 text-white rounded-lg shadow-md flex flex-col items-center cursor-pointer hover:bg-blue-700 transition"
+              className="p-6 bg-[#1877F2] text-white rounded-lg shadow-md flex flex-col items-center cursor-pointer hover:bg-blue-600 transition"
             >
               <div className="justify-center shadow-md w-fit flex bg-white rounded-full">
                 <img

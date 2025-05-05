@@ -127,7 +127,7 @@ function Profile() {
                                         src={profileimage || profileimg}
                                         alt="Profile"
                                     />
-                                    <i className="fa-solid fa-plus text-white text-lg bg-blue-600 p-2 rounded-full absolute bottom-2 right-2 shadow-md"></i>
+                                    <i className="fa-solid fa-plus text-white text-lg bg-[#1877F2] p-2 rounded-full absolute bottom-2 right-2 shadow-md"></i>
                                 </label>
 
 
@@ -287,7 +287,7 @@ function Profile() {
                     <button
                         onClick={handileUpdateprofile}
                         type="button"
-                        className="w-full mt-5 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                        className="w-full mt-5 bg-[#1877F2] text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                     >
                         Updadte Profile
                     </button>
