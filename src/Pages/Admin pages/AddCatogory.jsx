@@ -40,7 +40,7 @@ function AddCategory() {
       setgetAllCategorydata(result.data)
       setaddsandCatogoryResponse(result.data)
       setCategoryResponse(result.data)
-      console.log("Context updated with:", result.data); // And this line
+      
     } catch (error) {
       console.log("API error:", error);
     }
