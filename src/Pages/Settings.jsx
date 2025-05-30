@@ -27,7 +27,7 @@ function Settings() {
     }, [location.pathname, navigate]);
 
     const handilLogout=()=>{
-        sessionStorage.clear()
+        localStorage.clear()
         navigate('/')
     }
 

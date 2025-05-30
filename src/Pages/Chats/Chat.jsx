@@ -14,8 +14,8 @@ function Chat() {
 
     const { selectduserResponse, setselectduserResponse } = useContext(selectedChattoUserContext)
     const { setreciveridResponse } = useContext(reciverIdContext)
-    const user = JSON.parse(sessionStorage.getItem("user"))
-    const token = sessionStorage.getItem("token")
+    const user = JSON.parse(localStorage.getItem("user"))
+    const token = localStorage.getItem("token")
     const navigate = useNavigate();
     const { width } = useWindowSize();
 
@@ -51,11 +51,11 @@ function Chat() {
     const handleChatSelect = (worker) => {
         if (width < 768) {
             setreciveridResponse(worker._id)
-            sessionStorage.setItem("toReciverData", JSON.stringify(worker))
+            localStorage.setItem("toReciverData", JSON.stringify(worker))
             navigate('/chatpanel');
 
         } else {
-            sessionStorage.setItem("toReciverData", JSON.stringify(worker))
+            localStorage.setItem("toReciverData", JSON.stringify(worker))
             setreciveridResponse(worker._id);
             setselectduserResponse(worker._id)
 

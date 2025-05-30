@@ -15,10 +15,10 @@ function Chatpanel() {
     const { onlineusersResponse, isonlineworker, setonlineworker, messages, setMessages } = useContext(displayUserOnlineOrOflineContext)
     const { reciveridResponse } = useContext(reciverIdContext);
     const { setselectduserResponse } = useContext(selectedChattoUserContext)
-    const token = sessionStorage.getItem("token");
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const toReciverData = JSON.parse(sessionStorage.getItem("toReciverData"));
-    const reciverid = reciveridResponse || sessionStorage.getItem("reciverid");
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+    const toReciverData = JSON.parse(localStorage.getItem("toReciverData"));
+    const reciverid = reciveridResponse || localStorage.getItem("reciverid");
 
 
     const [newMessage, setNewMessage] = useState('');
@@ -42,7 +42,7 @@ function Chatpanel() {
     useEffect(() => {
         if (token && reciverid) {
             if (reciveridResponse) {
-                sessionStorage.setItem("reciverid", reciveridResponse);
+                localStorage.setItem("reciverid", reciveridResponse);
             }
             getAllmessage();
         }

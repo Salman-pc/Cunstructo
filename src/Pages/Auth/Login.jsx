@@ -24,8 +24,9 @@ function Login() {
                 if (result.status >= 200 && result.status <= 299) {
 
                     result.data.user.roll == "user" || result.data.user.roll == "worker" ? navigate('/') : navigate('/admindashbord')
-                    sessionStorage.setItem("user", JSON.stringify(result.data.user))
-                    sessionStorage.setItem("token", result.data.token)
+                    
+                    localStorage.setItem("user", JSON.stringify(result.data.user))
+                    localStorage.setItem("token", result.data.token)
                     setloginUserResposne(result)
                 } else {
                 

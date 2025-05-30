@@ -9,11 +9,9 @@ export const displayUserOnlineOrOflineContext = createContext([])
 function SocketioContext({ children }) {
 
     const socketRef = useRef(null);
-    const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
     const context = useContext(reciverIdContext) || {};
   
-
- 
     const [onlineusersResponse, setOnlineusersResponse] = useState([]);
     const [isonlineworker, setonlineworker] = useState()
     const [messages, setMessages] = useState([])
@@ -49,7 +47,6 @@ function SocketioContext({ children }) {
 
         //   console.log("Sending socket message to:", reciverSocketId);
 
-    
         socket.on("disconnect", () => {
             console.log("❌ Disconnected from socket.io server");
         });

@@ -11,8 +11,8 @@ function Profile() {
     const { setProfileResponse } = useContext(displayProfileContext)
     const { categoryResponse } = useContext(displaycategoryContext)
 
-    const token = sessionStorage.getItem("token");
-    const user = JSON.parse(sessionStorage.getItem("user"))
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"))
 
     const [profileData, setprofileData] = useState({})
     const [profileimage, setprofileimg] = useState()

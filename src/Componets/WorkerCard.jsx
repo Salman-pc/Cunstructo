@@ -14,16 +14,16 @@ function WorkerCard({ filterdWorker }) {
 
   const handileChattoworker=(id)=>{
     setreciveridResponse(id)
-    sessionStorage.setItem("reciverid", id);
+    localStorage.setItem("reciverid", id);
 
     if (width < 768) {
       setreciveridResponse(filterdWorker._id)
-      sessionStorage.setItem("toReciverData", JSON.stringify(filterdWorker))
+      localStorage.setItem("toReciverData", JSON.stringify(filterdWorker))
       navigate('/chatpanel');
 
 
   } else {
-      sessionStorage.setItem("toReciverData", JSON.stringify(filterdWorker))
+      localStorage.setItem("toReciverData", JSON.stringify(filterdWorker))
       setreciveridResponse(filterdWorker._id);
       navigate('/chats');
       setselectduserResponse(filterdWorker._id)

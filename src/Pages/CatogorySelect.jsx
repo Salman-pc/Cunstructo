@@ -12,7 +12,7 @@ const useQuery = () => {
 
 function CategorySelect() {
 
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const [searchTerm, setSearchTerm] = useState('');
   const [unavailableCatogryfield, setunavailableCatogryfield] = useState([])
   const [availableCatogryfield, setavailableCatogryfield] = useState([])

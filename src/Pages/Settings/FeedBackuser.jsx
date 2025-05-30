@@ -3,7 +3,7 @@ import { sendFeedbackApi } from "../../services/allApi";
 import { toast } from "react-toastify";
 
 function FeedBackuser() {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   const [feedback, setFeedback] = useState({message:"",date:""});
   const [submitted, setSubmitted] = useState(false);

@@ -15,8 +15,8 @@ import { toast } from "react-toastify";
 
 function Header() {
     const navigate = useNavigate();
-    const token = sessionStorage.getItem("token");
-    const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
 
     const [openMenu, setOpenMenu] = React.useState(false);
 
@@ -25,7 +25,7 @@ function Header() {
     };
 
     const handleSignOut = () => {
-        sessionStorage.clear();
+        localStorage.clear();
         navigate("/");
     };
 

@@ -71,8 +71,8 @@ function Signup({ isworker }) {
         const result = await RegisterApi(Signupdata)
         console.log(result);
         if (result.status >= 200 && result.status <= 299) {
-          sessionStorage.setItem("user", JSON.stringify(result.data.user))
-          sessionStorage.setItem("token", result.data.token)
+          localStorage.setItem("user", JSON.stringify(result.data.user))
+          localStorage.setItem("token", result.data.token)
           navigate("/");
         }
 
@@ -104,8 +104,8 @@ function Signup({ isworker }) {
         console.log(result);
         if (result.status >= 200 && result.status <= 299) {
 
-          sessionStorage.setItem("user", JSON.stringify(result.data.user))
-          sessionStorage.setItem("token", result.data.token)
+          localStorage.setItem("user", JSON.stringify(result.data.user))
+          localStorage.setItem("token", result.data.token)
           navigate("/");
         }
         else {

@@ -1,11 +1,11 @@
-import React, { useState ,useEffect} from "react";
-import { NavLink, Outlet, useNavigate,useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "../Componets/Header";
 
 
 const AdminDashboard = () => {
-  
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -13,17 +13,17 @@ const AdminDashboard = () => {
 
 
     useEffect(() => {
-            if (location.pathname === "/admindashbord") {
-                navigate("/admindashbord/addcatogory");
-            }
-        }, [location.pathname, navigate]);
+        if (location.pathname === "/admindashbord") {
+            navigate("/admindashbord/addcatogory");
+        }
+    }, [location.pathname, navigate]);
 
     return (
         <div className="min-h-screen bg-white overflow-hidden">
-           <div className="fixed w-full">
+            <div className="fixed w-full">
                 <Header />
-    
-           </div>
+
+            </div>
             <div className="relative max-w-7xl top-21 ">
                 {/* Sidebar */}
                 <div className={`fixed z-40 flex bg-opacity-50 md:h-fit h-screen transition-all duration-300 md:w-full ${sidebarOpen ? "w-64" : "w-0 overflow-hidden"}`}>
@@ -35,12 +35,12 @@ const AdminDashboard = () => {
                                 <span className="text-2xl">📂</span>
                                 <span className="text-md text-center font-medium">Add Category</span>
                             </NavLink>
-                            <NavLink to={'/admindashbord/add_adds'}  className={({ isActive }) =>
+                            <NavLink to={'/admindashbord/add_adds'} className={({ isActive }) =>
                                 `w-full flex items-center gap-2 p-3 text-gray-700 font-medium hover:bg-gray-100 border-2 border-gray-100 rounded-lg transition ${isActive ? 'bg-blue-200' : ''}`}>
                                 <span className="text-2xl">📢</span>
                                 <span className="text-md text-center font-medium">Change Ad</span>
                             </NavLink>
-                            <NavLink to={'/admindashbord/userlist'}  className={({ isActive }) =>
+                            <NavLink to={'/admindashbord/userlist'} className={({ isActive }) =>
                                 `w-full flex items-center gap-2 p-3 text-gray-700 font-medium hover:bg-gray-100 border-2 border-gray-100 rounded-lg transition ${isActive ? 'bg-blue-200' : ''}`}>
                                 <span className="text-2xl">👤</span>
                                 <span className="text-md text-center font-medium">Users</span>
@@ -55,7 +55,7 @@ const AdminDashboard = () => {
                                 <span className="text-2xl">📝</span>
                                 <span className="text-md text-center font-medium">Feedbacks</span>
                             </NavLink>
-                            <NavLink to={'/admindashbord/blocklist'}  className={({ isActive }) =>
+                            <NavLink to={'/admindashbord/blocklist'} className={({ isActive }) =>
                                 `w-full flex items-center gap-2 p-3 text-gray-700 font-medium hover:bg-gray-100 border-2 border-gray-100 rounded-lg transition ${isActive ? 'bg-blue-200' : ''}`}>
                                 <span className="text-2xl">🚫</span>
                                 <span className="text-md text-center font-medium">Blocked</span>
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
 
             {/* Main Content Area */}
             <div className="p-6 bg-white w-full text-center">
-            <Outlet/>
+                <Outlet />
             </div>
         </div>
     );

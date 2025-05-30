@@ -5,7 +5,7 @@ import serverUrl from '../../services/serverUrl';
 function ChatCard({workers, onSelect }) {
 
 
-const toReciverData = JSON.parse(sessionStorage.getItem("toReciverData"))
+const toReciverData = JSON.parse(localStorage.getItem("toReciverData"))
   
   return (
     <div 
