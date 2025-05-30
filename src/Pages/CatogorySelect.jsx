@@ -46,8 +46,7 @@ function CategorySelect() {
         "authorization": `Bearer ${token}`
       }
 
-      console.log(field, "field");
-
+  
       try {
         const result = await searchCategoryApi(searchTerm ? searchTerm : field, reqheader)
         setavailableCatogryfield(result.data.filteredAvailableUsers)
